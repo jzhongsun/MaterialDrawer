@@ -19,8 +19,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.internal.view.SupportMenuInflater;
-import android.support.v7.internal.view.menu.MenuBuilder;
+import android.support.v7.view.SupportMenuInflater;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -593,6 +593,7 @@ public class DrawerBuilder {
     // header view
     protected View mHeaderView;
     protected boolean mHeaderDivider = true;
+    protected boolean mHeaderPadding = true;
     protected boolean mHeaderClickable = false;
 
     /**
@@ -644,6 +645,17 @@ public class DrawerBuilder {
      */
     public DrawerBuilder withHeaderDivider(boolean headerDivider) {
         this.mHeaderDivider = headerDivider;
+        return this;
+    }
+
+    /**
+     * Set this to false if you don't need the padding below the header
+     *
+     * @param headerPadding
+     * @return
+     */
+    public DrawerBuilder withHeaderPadding(boolean headerPadding) {
+        this.mHeaderPadding = headerPadding;
         return this;
     }
 
@@ -1225,6 +1237,8 @@ public class DrawerBuilder {
         //build the view which will be set to the drawer
         Drawer result = buildView();
 
+        //define id for the sliderLayout
+        mSliderLayout.setId(R.id.material_drawer_slider_layout);
         // add the slider to the drawer
         mDrawerLayout.addView(mSliderLayout, 1);
 
@@ -1290,6 +1304,9 @@ public class DrawerBuilder {
 
         // add the slider to the drawer
         mDrawerLayout.addView(originalContentView, 0);
+
+        //define id for the sliderLayout
+        mSliderLayout.setId(R.id.material_drawer_slider_layout);
         // add the slider to the drawer
         mDrawerLayout.addView(mSliderLayout, 1);
 
@@ -1475,6 +1492,8 @@ public class DrawerBuilder {
         params = DrawerUtils.processDrawerLayoutParams(this, params);
         // set the new params
         mSliderLayout.setLayoutParams(params);
+        //define id for the sliderLayout
+        mSliderLayout.setId(R.id.material_drawer_slider_layout);
         // add the slider to the drawer
         mDrawerLayout.addView(mSliderLayout, 1);
 
